@@ -1,0 +1,57 @@
+/* CSS for Calculator */
+
+/* Reset CSS to normalize across browsers */
+@import url(reset.css);
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+}
+
+header {
+  padding: 20px;
+  font-size: 30rem;
+}
+
+.calculator {
+  border: black solid 1px;
+  border-radius: 10px;
+  background-color: lightgray;
+  padding: 20px;
+}
+
+.screen {
+  min-height: 100px;
+  background-color: white;
+  border: black solid 1px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+
+.span2 {
+  grid-column: span 2;
+}
+
+button {
+  padding: 10px;
+  font-size: 20rem;
+  border-radius: 5px;
+}
+
+footer {
+  padding: 10px;
+}
+
+footer img:hover {
+  transform: rotate(360deg);
+  transition: 1s;
+}
