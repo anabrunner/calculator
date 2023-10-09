@@ -36,6 +36,19 @@ multiplyButton.addEventListener("click", computeNum);
 subtractButton.addEventListener("click", computeNum);
 addButton.addEventListener("click", computeNum);
 equalButton.addEventListener("click", computeResult);
+window.addEventListener("keydown", keyboardInput);
+
+function keyboardInput(e) {
+  if (e.key >= 0 && e.key <= 9) document.getElementById(e.key).click();
+  if (e.key === "Escape") clearButton.click();
+  if (e.key === "Backspace") deleteButton.click();
+  if (e.key === ".") decimalButton.click();
+  if (e.key === "/") divideButton.click();
+  if (e.key === "*") multiplyButton.click();
+  if (e.key === "-") subtractButton.click();
+  if (e.key === "+") addButton.click();
+  if (e.key === "=" || e.key === "Enter") equalButton.click();
+};
 
 function updateScreen() {
   if (restart) {
