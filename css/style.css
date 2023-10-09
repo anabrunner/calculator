@@ -27,6 +27,7 @@ header {
   display: grid;
   grid-template-rows: 1fr 2fr;
   min-height: 150px;
+  min-width: 450px;
   background-color: white;
   border: black solid 1px;
   border-radius: 10px;

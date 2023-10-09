@@ -15,11 +15,15 @@ const operatorText = {
   "multiply" : "×",
   "subtract" : "-",
   "add" : "+",
+  "equal" : "=",
 };
 let num1 = 0;
 let num2 = 0;
+let result = 0;
 let operator = "";
 let switchOperation = false;
+let updateResult = false;
+let restart = false;
 
 numButtons.forEach(button => button.addEventListener("click", updateScreen));
 clearButton.addEventListener("click", clearScreen);
@@ -28,9 +32,13 @@ divideButton.addEventListener("click", computeNum);
 multiplyButton.addEventListener("click", computeNum);
 subtractButton.addEventListener("click", computeNum);
 addButton.addEventListener("click", computeNum);
-equalButton.addEventListener("click", getResult);
+equalButton.addEventListener("click", computeNum);
 
 function updateScreen() {
+  if (restart) {
+    clearScreen();
+    restart = false;
+  };
   if (!switchOperation) {
     currentScreen.innerText === "0" ? 
     currentScreen.innerText = this.id :
@@ -44,6 +52,12 @@ function updateScreen() {
 function clearScreen() { 
   currentScreen.innerText = "0";
   lastScreen.innerText = "";
+  num1 = 0;
+  num2 = 0;
+  result = 0;
+  operator = "";
+  switchOperation = false;
+  updateResult = false;
 };
 
 function deleteInput() {
@@ -51,43 +65,49 @@ function deleteInput() {
 };
 
 function computeNum() {
-  operator = this.id;
   num1 = parseFloat(currentScreen.innerText);
-  lastScreen.innerText = `${num1} ${operatorText[operator]}`;
+  if (updateResult) {
+    result = getResult();
+  } else {
+    result = num1;
+    operator = this.id;
+  };
+  operator = this.id;
+  lastScreen.innerText += ` ${num1} ${operatorText[operator]}`;
+  currentScreen.innerText = String(result);
+  num2 = result;
   switchOperation = true;
+  updateResult = true;
+  if (operator === "equal") {
+    restart = true;
+  }
 };
 
 function getResult() {
-  num2 = parseFloat(currentScreen.innerText);
-  lastScreen.innerText += ` ${num2} =`;
   switch (operator) {
     case "divide":
-      divide(num1, num2);
-      break;
+      return divide(num2, num1);
     case "multiply":
-      multiply(num1, num2);
-      break;
+      return multiply(num1, num2);
     case "subtract":
-      subtract(num1, num2);
-      break;
+      return subtract(num2, num1);
     case "add":
-      add(num1, num2);
-      break;
+      return add(num1, num2);
   };
 };
 
 function divide(a, b) {
-  currentScreen.innerText = String(a / b);
+  return a / b;
 };
 
 function multiply(a, b) {
-  currentScreen.innerText = String(a * b);
+  return a * b;
 };
 
 function subtract(a, b) {
-  currentScreen.innerText = String(a - b);
+  return a - b;
 };
 
 function add(a, b) {
-  currentScreen.innerText = String(a + b);
+  return a + b;
 };
