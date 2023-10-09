@@ -32,12 +32,11 @@ divideButton.addEventListener("click", computeNum);
 multiplyButton.addEventListener("click", computeNum);
 subtractButton.addEventListener("click", computeNum);
 addButton.addEventListener("click", computeNum);
-equalButton.addEventListener("click", computeNum);
+equalButton.addEventListener("click", computeResult);
 
 function updateScreen() {
   if (restart) {
     clearScreen();
-    restart = false;
   };
   if (!switchOperation) {
     currentScreen.innerText === "0" ? 
@@ -58,6 +57,7 @@ function clearScreen() {
   operator = "";
   switchOperation = false;
   updateResult = false;
+  restart = false;
 };
 
 function deleteInput() {
@@ -65,22 +65,41 @@ function deleteInput() {
 };
 
 function computeNum() {
+  if (switchOperation && !restart) return;
   num1 = parseFloat(currentScreen.innerText);
   if (updateResult) {
-    result = getResult();
+    if (restart) {
+      operator = this.id;
+      lastScreen.innerText = ` ${num1} ${operatorText[operator]}`;
+      restart = false;
+    } else {
+      result = getResult();
+      operator = this.id;
+      lastScreen.innerText += ` ${num1} ${operatorText[operator]}`;
+      currentScreen.innerText = String(result);
+    };
   } else {
     result = num1;
     operator = this.id;
+    lastScreen.innerText += ` ${num1} ${operatorText[operator]}`;
+    currentScreen.innerText = String(result);
   };
+  num2 = result;
+  switchOperation = true;
+  updateResult = true;
+};
+
+function computeResult() {
+  if (restart || switchOperation || !updateResult) return;
+  num1 = parseFloat(currentScreen.innerText);
+  result = getResult();
   operator = this.id;
   lastScreen.innerText += ` ${num1} ${operatorText[operator]}`;
   currentScreen.innerText = String(result);
   num2 = result;
   switchOperation = true;
   updateResult = true;
-  if (operator === "equal") {
-    restart = true;
-  }
+  restart = true;
 };
 
 function getResult() {
@@ -97,6 +116,10 @@ function getResult() {
 };
 
 function divide(a, b) {
+  if (b == "0") {
+    alert("Attempting to divide by zero may rip a hole in the fabric of space-time. Please press 'Clear' to continue.");
+    return 0;
+  };
   return a / b;
 };
 
