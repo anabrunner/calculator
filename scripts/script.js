@@ -4,6 +4,7 @@ const lastScreen = document.getElementById("lastScreen");
 const currentScreen = document.getElementById("currentScreen");
 const clearButton = document.getElementById("clear");
 const deleteButton = document.getElementById("delete");
+const decimalButton = document.getElementById(".");
 const divideButton = document.getElementById("divide");
 const multiplyButton = document.getElementById("multiply");
 const subtractButton = document.getElementById("subtract");
@@ -22,12 +23,14 @@ let num2 = 0;
 let result = 0;
 let operator = "";
 let switchOperation = false;
+let decimal = false;
 let updateResult = false;
 let restart = false;
 
 numButtons.forEach(button => button.addEventListener("click", updateScreen));
 clearButton.addEventListener("click", clearScreen);
 deleteButton.addEventListener("click", deleteInput);
+decimalButton.addEventListener("click", addDecimal);
 divideButton.addEventListener("click", computeNum);
 multiplyButton.addEventListener("click", computeNum);
 subtractButton.addEventListener("click", computeNum);
@@ -56,12 +59,22 @@ function clearScreen() {
   result = 0;
   operator = "";
   switchOperation = false;
+  decimal = false;
   updateResult = false;
   restart = false;
 };
 
 function deleteInput() {
   currentScreen.innerText = currentScreen.innerText.slice(0, -1);
+};
+
+function addDecimal() {
+  if (!decimal) {
+    currentScreen.innerText += ".";
+    decimal = true;
+  } else {
+    return;
+  };
 };
 
 function computeNum() {
@@ -87,6 +100,7 @@ function computeNum() {
   num2 = result;
   switchOperation = true;
   updateResult = true;
+  decimal = false;
 };
 
 function computeResult() {
@@ -100,6 +114,7 @@ function computeResult() {
   switchOperation = true;
   updateResult = true;
   restart = true;
+  decimal = false;
 };
 
 function getResult() {
