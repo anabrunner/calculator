@@ -30,7 +30,8 @@ header {
 .screen {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  min-height: 120px;
+  min-height: 150px;
+  min-width: 250px;
   background-color: rgb(201, 201, 180);
   border: black solid 1px;
   border-radius: 10px;
@@ -39,12 +40,12 @@ header {
 }
 
 #lastScreen {
-  font-size: 20rem;
+  font-size: 30rem;
   padding: 10px;
 }
 
 #currentScreen {
-  font-size: 30rem;
+  font-size: 40rem;
   text-align: right;
   padding: 10px;
 }
