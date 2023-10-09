@@ -24,11 +24,24 @@ header {
 }
 
 .screen {
-  min-height: 100px;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  min-height: 150px;
   background-color: white;
   border: black solid 1px;
   border-radius: 10px;
   margin-bottom: 20px;
+}
+
+#lastScreen {
+  font-size: 20rem;
+  padding: 10px;
+}
+
+#currentScreen {
+  font-size: 40rem;
+  text-align: right;
+  padding: 10px;
 }
 
 .buttons {
