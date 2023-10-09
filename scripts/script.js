@@ -15,6 +15,19 @@ numButtons.forEach((button) => {
   button.addEventListener("click", updateScreen)
 });
 
+clearButton.addEventListener("click", clearScreen);
+deleteButton.addEventListener("click", deleteInput);
+
 function updateScreen() {
-  currentScreen.innerText += this.id;
+  currentScreen.innerText === "0" ? 
+    currentScreen.innerText = this.id :
+    currentScreen.innerText += this.id;
+};
+
+function clearScreen() { 
+  currentScreen.innerText = "0";
+};
+
+function deleteInput() {
+  currentScreen.innerText = currentScreen.innerText.slice(0,-1);
 };
